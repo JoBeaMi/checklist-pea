@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checklist CAIDI - Observação e Apoio PEA</title>
     <link rel="stylesheet" href="style.css">
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F93E7XTQ8N"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-F93E7XTQ8N');
+    </script>
 </head>
 <body>
     <div class="container">
@@ -13,10 +22,10 @@
             <div class="logo-container">
                 <img src="logo-caidi.png" alt="Logo CAIDI" class="logo" id="logo">
             </div>
-            <h1>Checklist de observação e apoio</h1>
+            <h1>Checklist de Observação e Apoio</h1>
             <h2>Perturbação do Espetro do Autismo</h2>
             <p class="subtitle">CAIDI - Centro de Apoio e Intervenção no Desenvolvimento Infantil</p>
-            <p class="credits">Desenvolvido por NIDCAIDI</p>
+            <p class="credits">Desenvolvido por <strong>NIDCAIDI</strong></p>
         </header>
 
         <!-- Formulário de Identificação -->
@@ -69,7 +78,7 @@
         <!-- Relatório (inicialmente oculto) -->
         <section class="relatorio" id="relatorio" style="display: none;">
             <div class="relatorio-header">
-                <h3>Relatório de observação</h3>
+                <h3>Relatório de Observação</h3>
                 <button class="btn btn-success" onclick="exportarPDF()">💾 Guardar como PDF</button>
             </div>
             <div id="relatorioConteudo"></div>
@@ -77,9 +86,10 @@
 
         <!-- Rodapé -->
         <footer class="footer">
-            <p>© CAIDI 2025 | Coordenação Científica: NIDCAIDI</p>
+            <p>© CAIDI 2025 | Coordenação Científica: <strong>NIDCAIDI</strong></p>
             <p>Para: Agrupamento de Escolas Padre Vitor Melícias</p>
             <p class="aviso">⚠️ Esta é uma ferramenta pedagógica de observação. Não é um instrumento de diagnóstico clínico.</p>
+            <p class="privacidade">🔒 <strong>Privacidade:</strong> Todos os dados inseridos nesta aplicação são processados localmente no seu dispositivo. Nenhuma informação pessoal ou avaliação é enviada para servidores externos ou acessível pelo <strong>NIDCAIDI</strong>. Os dados permanecem exclusivamente consigo.</p>
         </footer>
     </div>
 
