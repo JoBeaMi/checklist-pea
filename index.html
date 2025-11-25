@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checklist CAIDI - Observação e Apoio PEA</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Cabeçalho -->
+        <header class="header">
+            <div class="logo-container">
+                <img src="logo-caidi.png" alt="Logo CAIDI" class="logo" id="logo">
+            </div>
+            <h1>Checklist de Observação e Apoio</h1>
+            <h2>Alunos com Sinais de Perturbação do Espetro do Autismo</h2>
+            <p class="subtitle">CAIDI - Centro de Apoio e Intervenção no Desenvolvimento Infantil</p>
+            <p class="credits">Desenvolvido por: Joana Miguel e Joana Carvalho | NIDCAIDI</p>
+        </header>
+
+        <!-- Formulário de Identificação -->
+        <section class="identificacao">
+            <h3>Identificação do Aluno</h3>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="nomeAluno">Nome do Aluno:</label>
+                    <input type="text" id="nomeAluno" placeholder="Nome completo">
+                </div>
+                <div class="form-group">
+                    <label for="turma">Turma:</label>
+                    <input type="text" id="turma" placeholder="Ex: 5ºA">
+                </div>
+                <div class="form-group">
+                    <label for="data">Data:</label>
+                    <input type="date" id="data">
+                </div>
+                <div class="form-group">
+                    <label for="professor">Professor(a):</label>
+                    <input type="text" id="professor" placeholder="Nome do professor">
+                </div>
+            </div>
+        </section>
+
+        <!-- Instruções -->
+        <section class="instrucoes">
+            <p><strong>Instruções:</strong> Avalie cada sinal observado. 
+            <span class="badge badge-0">0 = Não observado</span>
+            <span class="badge badge-1">1 = Manifestação ligeira</span>
+            <span class="badge badge-2">2 = Manifestação acentuada</span>
+            </p>
+        </section>
+
+        <!-- Checklist -->
+        <section class="checklist" id="checklist">
+            <!-- Será preenchido por JavaScript -->
+        </section>
+
+        <!-- Botões de Ação -->
+        <section class="acoes">
+            <button class="btn btn-primary" onclick="gerarRelatorio()">
+                📊 Gerar Relatório
+            </button>
+            <button class="btn btn-secondary" onclick="limparFormulario()">
+                🔄 Limpar Tudo
+            </button>
+        </section>
+
+        <!-- Relatório (inicialmente oculto) -->
+        <section class="relatorio" id="relatorio" style="display: none;">
+            <div class="relatorio-header">
+                <h3>Relatório de Observação</h3>
+                <button class="btn btn-success" onclick="exportarPDF()">💾 Guardar como PDF</button>
+            </div>
+            <div id="relatorioConteudo"></div>
+        </section>
+
+        <!-- Rodapé -->
+        <footer class="footer">
+            <p>© CAIDI 2024 | Desenvolvido por: Joana Miguel e Joana Carvalho (NIDCAIDI)</p>
+            <p>Para: Agrupamento de Escolas Padre Vitor Melícias</p>
+            <p class="aviso">⚠️ Esta é uma ferramenta pedagógica de observação. NÃO é um instrumento de diagnóstico clínico.</p>
+        </footer>
+    </div>
+
+    <script src="dados.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
