@@ -90,7 +90,7 @@ const dadosChecklist = {
 • Integrar movimento em aprendizagens (responder com gestos, trabalho em estações)
 • Permitir a utilização de banda elástica resistente em volta das pernas da cadeira para pés, se recomendado pela equipa clínica
 • Ensinar técnicas de autorregulação propriocetiva (pressão, esticamentos discretos)
-• Nunca punir movimento - é uma necessidade sensorial, não comportamento um inadequado`
+• Nunca punir movimento - é uma necessidade sensorial, não um comportamento inadequado`
         },
         {
             sinal: "Estereotipias ou movimentos repetitivos (balanceio, repetição de palavras)",
