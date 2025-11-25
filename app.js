@@ -346,28 +346,24 @@ function criarSecaoPrioridade(perfil) {
     secao.className = 'relatorio-secao';
     
     const titulo = document.createElement('h4');
-    titulo.textContent = 'Nível de Prioridade de Intervenção';
+    titulo.textContent = 'Perfil de necessidades de apoio';
     secao.appendChild(titulo);
     
     let nivel, classe, texto;
     
-    if (perfil.acentuados >= 5) {
-        nivel = '⚠️ URGENTE';
-        classe = 'prioridade-urgente';
-        texto = 'Avaliação especializada imediata necessária';
-    } else if (perfil.acentuados >= 3) {
-        nivel = '🔴 ALTA';
-        classe = 'prioridade-alta';
-        texto = 'Intervenção prioritária com apoio especializado';
-    } else if (perfil.acentuados >= 1 || perfil.ligeiros >= 4) {
-        nivel = '🔶 MODERADA';
-        classe = 'prioridade-moderada';
-        texto = 'Intervenção estruturada e monitorização regular';
-    } else {
-        nivel = '✅ LIGEIRA';
-        classe = 'prioridade-ligeira';
-        texto = 'Ajustes pedagógicos e monitorização trimestral';
-    }
+if (perfil.acentuados >= 5) {
+    nivel = '⚠️ ELEVADO';
+    texto = 'Apoio pedagógico intensivo e diferenciação significativa';
+} else if (perfil.acentuados >= 3) {
+    nivel = '🔴 ALTO';
+    texto = 'Apoio pedagógico estruturado com estratégias específicas';
+} else if (perfil.acentuados >= 1 || perfil.ligeiros >= 4) {
+    nivel = '🔶 MODERADO';
+    texto = 'Ajustes pedagógicos e monitorização regular';
+} else {
+    nivel = '✅ LIGEIRO';
+    texto = 'Estratégias de diferenciação e acompanhamento';
+}
     
     const prioridadeDiv = document.createElement('div');
     prioridadeDiv.className = `prioridade ${classe}`;
