@@ -15,11 +15,6 @@ Esta é uma **aplicação web gratuita** que permite aos professores:
 - Guardar como PDF
 - Tudo funciona no navegador - **dados ficam privados** (não vão para servidor)
 
-3. Escreve uma mensagem (ex: "Primeira versão da checklist")
-
-4. Clica **"Commit changes"**
-
-⏱️ Os ficheiros vão fazer upload (pode demorar 1-2 minutos)
 
    ```
 
