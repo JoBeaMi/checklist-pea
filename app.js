@@ -1,5 +1,6 @@
 // Estado da aplicação
 let respostas = {};
+let sinaisInfo = {}; // Guardar info dos sinais
 
 // Inicializar aplicação
 document.addEventListener('DOMContentLoaded', function() {
@@ -41,6 +42,14 @@ function construirChecklist() {
             const sinalDiv = document.createElement('div');
             sinalDiv.className = 'sinal-item';
             
+            // Guardar info do sinal
+            sinaisInfo[sinalId] = {
+                categoria: categoria,
+                sinal: item.sinal,
+                estrategias_grau1: item.estrategias_grau1,
+                estrategias_grau2: item.estrategias_grau2
+            };
+            
             // Descrição do sinal
             const descricao = document.createElement('div');
             descricao.className = 'sinal-descricao';
@@ -51,7 +60,9 @@ function construirChecklist() {
             const opcoes = document.createElement('div');
             opcoes.className = 'sinal-opcoes';
             
-            // Radio buttons
+            // Radio buttons - NOME ÚNICO para cada sinal!
+            const radioName = `sinal_${sinalId}`;
+            
             [
                 { valor: 0, label: 'Não observado' },
                 { valor: 1, label: 'Ligeira' },
@@ -62,10 +73,20 @@ function construirChecklist() {
                 
                 const radio = document.createElement('input');
                 radio.type = 'radio';
-                radio.name = `sinal_${sinalId}`;
+                radio.name = radioName; // CADA SINAL TEM NOME ÚNICO
                 radio.value = opcao.valor;
-                radio.id = `sinal_${sinalId}_${opcao.valor}`;
-                radio.onchange = () => salvarResposta(sinalId, categoria, item, opcao.valor);
+                radio.id = `${radioName}_${opcao.valor}`;
+                
+                // Usar data attributes para guardar info
+                radio.setAttribute('data-sinal-id', sinalId);
+                
+                // Event listener
+                radio.addEventListener('change', function() {
+                    const id = parseInt(this.getAttribute('data-sinal-id'));
+                    const grau = parseInt(this.value);
+                    salvarResposta(id, grau);
+                    console.log(`✅ Salvei: ID=${id}, Grau=${grau}, Categoria=${sinaisInfo[id].categoria}`);
+                });
                 
                 const label = document.createElement('label');
                 label.htmlFor = radio.id;
@@ -83,7 +104,11 @@ function construirChecklist() {
             obs.className = 'observacao-input';
             obs.placeholder = 'Observações adicionais (opcional)';
             obs.id = `obs_${sinalId}`;
-            obs.onchange = (e) => salvarObservacao(sinalId, e.target.value);
+            obs.setAttribute('data-sinal-id', sinalId);
+            obs.addEventListener('change', function() {
+                const id = parseInt(this.getAttribute('data-sinal-id'));
+                salvarObservacao(id, this.value);
+            });
             sinalDiv.appendChild(obs);
             
             categoriaDiv.appendChild(sinalDiv);
@@ -92,29 +117,41 @@ function construirChecklist() {
         
         container.appendChild(categoriaDiv);
     }
+    
+    console.log(`✅ Checklist construída com ${sinalId} sinais`);
 }
 
-// Salvar resposta
-function salvarResposta(id, categoria, item, grau) {
-    if (!respostas[id]) {
-        respostas[id] = {};
+// Salvar resposta - VERSÃO SIMPLIFICADA
+function salvarResposta(id, grau) {
+    if (!sinaisInfo[id]) {
+        console.error('❌ Erro: Sinal ID não encontrado:', id);
+        return;
     }
-    respostas[id].categoria = categoria;
-    respostas[id].sinal = item.sinal;
-    respostas[id].grau = parseInt(grau);
-    respostas[id].estrategias_grau1 = item.estrategias_grau1;
-    respostas[id].estrategias_grau2 = item.estrategias_grau2;
+    
+    respostas[id] = {
+        categoria: sinaisInfo[id].categoria,
+        sinal: sinaisInfo[id].sinal,
+        grau: parseInt(grau),
+        estrategias_grau1: sinaisInfo[id].estrategias_grau1,
+        estrategias_grau2: sinaisInfo[id].estrategias_grau2
+    };
+    
+    console.log('📝 Resposta salva:', respostas[id]);
 }
 
 // Salvar observação
 function salvarObservacao(id, texto) {
     if (respostas[id]) {
         respostas[id].observacao = texto;
+        console.log(`📝 Observação salva para ID ${id}`);
     }
 }
 
 // Gerar relatório
 function gerarRelatorio() {
+    console.log('📊 Gerando relatório...');
+    console.log('Respostas atuais:', respostas);
+    
     // Validar dados de identificação
     const nome = document.getElementById('nomeAluno').value.trim();
     const turma = document.getElementById('turma').value.trim();
@@ -128,6 +165,8 @@ function gerarRelatorio() {
     
     // Verificar se há pelo menos uma resposta
     const respostasValidas = Object.values(respostas).filter(r => r.grau !== undefined);
+    console.log('Respostas válidas:', respostasValidas.length);
+    
     if (respostasValidas.length === 0) {
         alert('Por favor, avalie pelo menos um sinal antes de gerar o relatório.');
         return;
@@ -143,6 +182,7 @@ function gerarRelatorio() {
     
     // Perfil Quantitativo
     const perfil = calcularPerfilQuantitativo();
+    console.log('Perfil calculado:', perfil);
     conteudo.appendChild(criarSecaoPerfilQuantitativo(perfil));
     
     // Sinais Identificados
@@ -157,6 +197,8 @@ function gerarRelatorio() {
     // Mostrar relatório
     relatorioDiv.style.display = 'block';
     relatorioDiv.scrollIntoView({ behavior: 'smooth' });
+    
+    console.log('✅ Relatório gerado!');
 }
 
 // Criar secção de identificação
@@ -357,8 +399,6 @@ function criarSecaoEstrategias() {
     console.log('Sinais com estratégias:', sinaisComEstrategias.length);
     sinaisComEstrategias.forEach(s => {
         console.log('- Categoria:', s.categoria, '| Sinal:', s.sinal, '| Grau:', s.grau);
-        console.log('  Tem estratégias grau1?', !!s.estrategias_grau1);
-        console.log('  Tem estratégias grau2?', !!s.estrategias_grau2);
     });
     
     if (sinaisComEstrategias.length === 0) {
@@ -429,14 +469,11 @@ function limparFormulario() {
     
     // Scroll para topo
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    
+    console.log('🔄 Formulário limpo');
 }
 
 // Exportar para PDF
 function exportarPDF() {
-    // Opção 1: Usar window.print() - mais simples
     window.print();
-    
-    // Nota: Para PDF mais avançado, poderia usar biblioteca como jsPDF ou html2pdf
-    // Mas isso aumentaria complexidade. window.print() funciona bem e permite
-    // ao utilizador escolher entre imprimir ou guardar como PDF
 }
