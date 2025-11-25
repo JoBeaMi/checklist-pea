@@ -22,7 +22,11 @@ function construirChecklist() {
     const container = document.getElementById('checklist');
     let sinalId = 0;
     
+    console.log('📋 Construindo checklist...');
+    console.log('Total de categorias:', Object.keys(dadosChecklist).length);
+    
     for (const [categoria, sinais] of Object.entries(dadosChecklist)) {
+        console.log('Categoria:', categoria, '- Sinais:', sinais.length);
         const categoriaDiv = document.createElement('div');
         categoriaDiv.className = 'categoria';
         
@@ -348,6 +352,14 @@ function criarSecaoEstrategias() {
     secao.appendChild(intro);
     
     const sinaisComEstrategias = Object.values(respostas).filter(r => r.grau > 0);
+    
+    console.log('🎯 Gerando estratégias...');
+    console.log('Sinais com estratégias:', sinaisComEstrategias.length);
+    sinaisComEstrategias.forEach(s => {
+        console.log('- Categoria:', s.categoria, '| Sinal:', s.sinal, '| Grau:', s.grau);
+        console.log('  Tem estratégias grau1?', !!s.estrategias_grau1);
+        console.log('  Tem estratégias grau2?', !!s.estrategias_grau2);
+    });
     
     if (sinaisComEstrategias.length === 0) {
         const msg = document.createElement('p');
