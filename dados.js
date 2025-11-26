@@ -49,7 +49,7 @@ const dadosChecklist = {
     ],
     "PROCESSAMENTO SENSORIAL": [
         {
-            sinal: "Quando há muito ruído, tapa os ouvidos",
+            sinal: "Quando há muito ruído, tapa os ouvidos ou demonstra sinais de grande desconforto",
             estrategias_grau1: `• Permitir uso de auriculares de cancelamento de ruído durante atividades ruidosas
 • Avisar previamente sobre atividades que serão ruidosas
 • Permitir sentar longe de fontes de ruído (porta, janela com ruído exterior)`,
@@ -93,7 +93,7 @@ const dadosChecklist = {
 • Nunca punir movimento - é uma necessidade sensorial, não um comportamento inadequado`
         },
         {
-            sinal: "Estereotipias ou movimentos repetitivos (balanceio, repetição de palavras)",
+            sinal: "Estereotipias ou movimentos repetitivos (balanceio do corpo ou membros, repetição de palavras sem intenção comunicativa)",
             estrategias_grau1: `• Dedicar momentos específicos para estereotipias na rotina (ex: pausas programadas)
 • Compreender que são mecanismos de autorregulação, não comportamentos a eliminar
 • Observar padrões: quando aumentam? (stress, cansaço, excitação?)`,
@@ -143,7 +143,7 @@ const dadosChecklist = {
 • Ensinar ligação entre sensações corporais e emoções`
         },
         {
-            sinal: "Episódios de frustração",
+            sinal: "Episódios de frustração intensa",
             estrategias_grau1: `• Oferecer pausas regulares antes de atingir ponto de sobrecarga
 • Ensinar estratégias de autorregulação quando o aluno está calmo
 • Reconhecer sinais precoces de frustração`,
@@ -163,7 +163,7 @@ const dadosChecklist = {
     ],
     "ROTINAS E MUDANÇAS": [
         {
-            sinal: "Falta de rotina em contextos não estruturados",
+            sinal: "Desregula-se perante a falta de rotina em contextos não estruturados",
             estrategias_grau1: `• Estruturar transições entre aulas com rotinas previsíveis
 • Proporcionar atividades estruturadas para tempos livres
 • Usar apoio visual para sequência de atividades`,
