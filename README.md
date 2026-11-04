@@ -2,7 +2,7 @@
 
 **Ferramenta de observação para planear o apoio a alunos autistas, com ou sem diagnóstico**
 
-Desenvolvido por: Joana Miguel e Joana Carvalho (NIDCAIDI/CAIDI)
+Desenvolvido por: NIDCAIDI/CAIDI
 Para: Agrupamento de Escolas Padre Vítor Melícias
 
 > ⚠️ Esta é uma ferramenta pedagógica de observação. Não serve para diagnosticar nem para sinalizar possível autismo.
