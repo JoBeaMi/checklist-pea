@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-PT">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checklist CAIDI - Observação e Apoio PEA</title>
+    <meta name="description" content="Checklist de observação e apoio para planear o apoio a alunos autistas, com ou sem diagnóstico, com relatório e estratégias pedagógicas.">
+    <meta name="theme-color" content="#2D6A63">
+    <link rel="icon" href="logo-caidi.png">
     <link rel="stylesheet" href="style.css">
-    
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-F93E7XTQ8N"></script>
     <script>
@@ -16,8 +19,9 @@
     </script>
 </head>
 <body>
+    <a class="saltar" href="#checklist">Saltar para a checklist</a>
+
     <div class="container">
-        <!-- Cabeçalho -->
         <header class="header">
             <div class="logo-container">
                 <img src="logo-caidi.png" alt="Logo CAIDI" class="logo" id="logo">
@@ -28,68 +32,163 @@
             <p class="credits">Desenvolvido por <strong>NIDCAIDI</strong></p>
         </header>
 
-        <!-- Formulário de Identificação -->
-        <section class="identificacao">
-            <h3>Identificação do Aluno</h3>
-            <div class="form-grid">
-                <div class="form-group">
-                    <label for="nomeAluno">Nome do Aluno:</label>
-                    <input type="text" id="nomeAluno" placeholder="Nome completo">
+        <main>
+            <section class="sobre">
+                <p><strong>Para que serve.</strong> Esta checklist ajuda a observar as competências, características e condições que influenciam a participação de alunos autistas, com ou sem diagnóstico, e a planear o apoio na escola. Não serve para diagnosticar nem para sinalizar possível autismo.</p>
+            </section>
+
+            <!-- Identificação -->
+            <section class="identificacao" aria-labelledby="titulo-identificacao">
+                <h3 id="titulo-identificacao">Identificação do Aluno</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="nomeAluno">Nome do Aluno</label>
+                        <input type="text" id="nomeAluno" placeholder="Nome completo" autocomplete="off" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="turma">Turma</label>
+                        <input type="text" id="turma" placeholder="Ex: 5ºA" autocomplete="off" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="data">Data</label>
+                        <input type="date" id="data" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="nivel">Nível de ensino</label>
+                        <select id="nivel" required>
+                            <option value="">Escolher</option>
+                            <option>Pré-escolar</option>
+                            <option>1.º ciclo</option>
+                            <option>2.º ciclo</option>
+                            <option>3.º ciclo</option>
+                            <option>Secundário</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="professor">Professor(a)</label>
+                        <input type="text" id="professor" placeholder="Nome do professor" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="periodo">Período de observação</label>
+                        <select id="periodo" required>
+                            <option value="">Escolher</option>
+                            <option>Última semana</option>
+                            <option>Último mês</option>
+                            <option>Este período letivo</option>
+                            <option>Desde o início do ano letivo</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="turma">Turma:</label>
-                    <input type="text" id="turma" placeholder="Ex: 5ºA">
+            </section>
+
+            <!-- Contexto -->
+            <section class="contexto" aria-labelledby="titulo-contexto">
+                <h3 id="titulo-contexto">Contexto e apoios atuais</h3>
+                <p class="nota-secao">Preencha só o que souber.</p>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="horasTurma">Horas por semana na turma</label>
+                        <input type="number" id="horasTurma" min="0" max="45" step="1" inputmode="numeric">
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="data">Data:</label>
-                    <input type="date" id="data">
+                <fieldset class="grupo-opcoes" data-campo="apoiosEscola">
+                    <legend>Apoios na escola</legend>
+                </fieldset>
+                <fieldset class="grupo-opcoes" data-campo="apoiosFora">
+                    <legend>Apoios fora da escola <span class="legenda-saude"><span class="marca-saude">✚</span> dado de saúde</span></legend>
+                </fieldset>
+                <fieldset class="grupo-opcoes" data-campo="medidas">
+                    <legend>Medidas em vigor (Decreto-Lei n.º 54/2018)</legend>
+                </fieldset>
+                <details class="info-adicional">
+                    <summary>Informação adicional (opcional)</summary>
+                    <div class="form-grid">
+                        <fieldset class="grupo-opcoes grupo-radio" data-campo="rtp" data-tipo="radio">
+                            <legend>Tem relatório técnico-pedagógico?</legend>
+                        </fieldset>
+                        <fieldset class="grupo-opcoes grupo-radio" data-campo="diagnostico" data-tipo="radio">
+                            <legend>Diagnóstico de PEA <span class="legenda-saude"><span class="marca-saude">✚</span> dado de saúde</span></legend>
+                        </fieldset>
+                    </div>
+                </details>
+            </section>
+
+            <!-- Pontos fortes -->
+            <section class="pontos-fortes" aria-labelledby="titulo-fortes">
+                <h3 id="titulo-fortes">Pontos fortes e voz do aluno e da família</h3>
+                <p class="nota-secao">Comece pelo que corre bem. Estes campos são opcionais e aparecem no início do relatório. Os interesses do aluno estão no item 27.</p>
+                <div class="form-grid">
+                    <div class="form-group"><label for="pf_destaca">Em que se destaca e o que corre bem</label><textarea id="pf_destaca" class="campo-livre" rows="2" placeholder="Ex.: memória para factos, rigor, gosto por regras claras"></textarea></div>
+                    <div class="form-group"><label for="pf_acalma">O que o ajuda a acalmar</label><textarea id="pf_acalma" class="campo-livre" rows="2" placeholder="Ex.: auscultadores, desenhar, um sítio calmo"></textarea></div>
+                    <div class="form-group"><label for="pf_comunica">Como prefere comunicar</label><textarea id="pf_comunica" class="campo-livre" rows="2" placeholder="Ex.: por escrito, com imagens, falar a sós"></textarea></div>
+                    <div class="form-group"><label for="voz_aluno">O que o aluno diz que o ajuda e o que lhe custa</label><textarea id="voz_aluno" class="campo-livre" rows="2" placeholder="Se foi possível perguntar"></textarea></div>
+                    <div class="form-group"><label for="voz_familia">O que a família partilha</label><textarea id="voz_familia" class="campo-livre" rows="2" placeholder="Ex.: o que funciona em casa, preocupações"></textarea></div>
                 </div>
-                <div class="form-group">
-                    <label for="professor">Professor(a):</label>
-                    <input type="text" id="professor" placeholder="Nome do professor">
+            </section>
+
+            <!-- Instruções -->
+            <section class="instrucoes">
+                <p><strong>Como responder.</strong> Há quatro tipos de pergunta, e cada uma tem as suas opções.</p>
+                <ul class="lista-instrucoes">
+                    <li><strong>Competências.</strong> Escolha o apoio de que o aluno precisa, <em>incluindo o que já recebe</em>. Um aluno que está bem porque já tem uma adaptação continua a precisar dela. Se faz sem apoio na escola mas não sabe se também o faz noutros contextos, escolha «Sem apoio, na escola» e indique o que sabe.</li>
+                    <li><strong>Participação.</strong> Responda sim, às vezes, não ou não sei.</li>
+                    <li><strong>Características.</strong> Indique se se observa e qual o impacto na participação ou no bem-estar. O impacto pode vir da reação dos outros.</li>
+                    <li><strong>Situações e bem-estar.</strong> Responda sim, não ou não sei.</li>
+                </ul>
+                <p class="nota">Use «Não foi possível observar» quando não teve oportunidade de ver. O preenchimento fica guardado neste separador enquanto estiver aberto.</p>
+            </section>
+
+            <!-- Áreas -->
+            <section class="areas" aria-labelledby="titulo-areas">
+                <h3 id="titulo-areas">Em que áreas tem observações a fazer?</h3>
+                <p class="nota-secao">Pode preencher por partes. As áreas sem visto ficam fechadas e não entram no relatório, que as indica como não observadas. A área das emoções e da regulação, que inclui o bem-estar, fica sempre aberta. O item 12, sobre exclusão e intimidação, também fica sempre visível. A autonomia pessoal começa fechada a partir do 2.º ciclo, mas pode ser aberta.</p>
+                <div class="grupo-opcoes-lista" id="listaAreas"></div>
+            </section>
+
+            <div class="progresso" id="progresso" aria-live="polite">
+                <div class="progresso-texto"><span id="progressoTexto">0 de 0 itens respondidos</span></div>
+                <div class="progresso-barra" role="progressbar" aria-label="Itens respondidos" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progressoBarra">
+                    <div class="progresso-preenchido" id="progressoPreenchido"></div>
                 </div>
             </div>
-        </section>
 
-        <!-- Instruções -->
-        <section class="instrucoes">
-            <p><strong>Instruções:</strong> Avalie cada sinal observado. 
-            <span class="badge badge-0">0 = Não observado</span>
-            <span class="badge badge-1">1 = Manifestação ligeira</span>
-            <span class="badge badge-2">2 = Manifestação acentuada</span>
-            </p>
-        </section>
+            <section class="checklist" id="checklist" aria-label="Checklist" tabindex="-1"></section>
 
-        <!-- Checklist -->
-        <section class="checklist" id="checklist">
-            <!-- Será preenchido por JavaScript -->
-        </section>
+            <section class="acoes">
+                <label class="opcao-relatorio"><input type="checkbox" id="incluirObservacoes" checked> Incluir as observações no relatório</label>
+                <label class="opcao-relatorio"><input type="checkbox" id="incluirPorDecidir"> Incluir no PDF as estratégias por decidir</label>
+                <label class="opcao-relatorio"><input type="checkbox" id="incluirSaude"> Incluir no PDF a informação de saúde (diagnóstico e apoios fora da escola marcados com ✚)</label>
+                <button type="button" class="btn btn-primary" id="btnGerar">📊 Gerar Relatório</button>
+                <button type="button" class="btn btn-secondary" id="btnLimpar">🔄 Limpar Tudo</button>
+            </section>
 
-        <!-- Botões de Ação -->
-        <section class="acoes">
-            <button class="btn btn-primary" onclick="gerarRelatorio()">
-                📊 Gerar Relatório
-            </button>
-            <button class="btn btn-secondary" onclick="limparFormulario()">
-                🔄 Limpar Tudo
-            </button>
-        </section>
+            <section class="relatorio" id="relatorio" hidden aria-labelledby="titulo-relatorio" tabindex="-1">
+                <div class="relatorio-header">
+                    <h3 id="titulo-relatorio">Relatório de Observação</h3>
+                    <button type="button" class="btn btn-success" id="btnPDF">💾 Guardar como PDF</button>
+                </div>
+                <p class="dica-pdf">Na janela de impressão, escolha <strong>«Guardar como PDF»</strong> como destino.</p>
+                <div id="relatorioConteudo"></div>
+            </section>
 
-        <!-- Relatório (inicialmente oculto) -->
-        <section class="relatorio" id="relatorio" style="display: none;">
-            <div class="relatorio-header">
-                <h3>Relatório de Observação</h3>
-                <button class="btn btn-success" onclick="exportarPDF()">💾 Guardar como PDF</button>
-            </div>
-            <div id="relatorioConteudo"></div>
-        </section>
+            <section class="partilha" id="partilha" hidden aria-labelledby="titulo-partilha">
+                <h3 id="titulo-partilha">Partilhar sem identificação</h3>
+                <p>Pode partilhar com a CAIDI os níveis assinalados e as estratégias marcadas, para ajudar a validar e melhorar a ferramenta. <strong>Nunca são enviados</strong> o nome, a turma, a data exata, o nome do professor nem nenhum campo de texto livre.</p>
+                <label class="opcao-relatorio confirmar-partilha"><input type="checkbox" id="confirmarAutorizacao"> Confirmo que a família deste aluno autorizou esta partilha</label>
+                <details class="detalhe-envio">
+                    <summary>Ver exatamente o que vai ser enviado</summary>
+                    <pre id="previaEnvio"></pre>
+                </details>
+                <button type="button" class="btn btn-primary" id="btnEnviar" disabled>Enviar</button>
+                <p class="estado-envio" id="estadoEnvio" aria-live="polite"></p>
+            </section>
+        </main>
 
-        <!-- Rodapé -->
         <footer class="footer">
             <p>© CAIDI 2025 | Coordenação Científica: <strong>NIDCAIDI</strong></p>
             <p>Para: Agrupamento de Escolas Padre Vítor Melícias</p>
             <p class="aviso">⚠️ Esta é uma ferramenta pedagógica de observação. Não é um instrumento de diagnóstico clínico.</p>
-            <p class="privacidade">🔒 <strong>Privacidade:</strong> Todos os dados inseridos nesta aplicação são processados localmente no seu dispositivo. Nenhuma informação pessoal ou avaliação é enviada para servidores externos ou acessível pelo <strong>NIDCAIDI</strong>. Os dados permanecem exclusivamente consigo.</p>
+            <p class="privacidade">🔒 <strong>Privacidade:</strong> Os dados que identificam o aluno (nome, turma, data, nome do professor, observações e outros campos de texto) nunca saem deste dispositivo. Ficam guardados temporariamente neste separador do navegador e são apagados quando o fecha ou clica em «Limpar Tudo».<span id="privacidadePartilha"> No fim do relatório, o professor pode escolher partilhar com a CAIDI, sem identificação, os níveis assinalados e as estratégias marcadas, apenas quando a família autorizou.</span> A página recolhe ainda estatísticas anónimas de visitas (Google Analytics), que não incluem nenhum dado do formulário.</p>
         </footer>
     </div>
 
