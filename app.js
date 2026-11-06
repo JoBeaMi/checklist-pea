@@ -932,10 +932,15 @@ function candidatosFortes(r) {
         const x = r[id];
         if (!x) return;
         if (ITENS[id].tipo === 'N' && x.v === 'Sem ajuda individual') c.push({ k: `item:${id}`, t: `${ITENS[id].titulo}, sem ajuda individual` });
-        if (ITENS[id].tipo === 'N' && x.seg.adapt && x.seg.adapt.length && !x.seg.adapt.includes('Nenhum')) c.push({ k: `adapt:${id}`, t: `${ITENS[id].titulo}, com ${x.seg.adapt.join(', ').toLowerCase()}` });
+        if (ITENS[id].tipo === 'N' && x.seg.adapt && x.seg.adapt.length && !x.seg.adapt.includes('Nenhum')) c.push({ k: `adapt:${id}`, t: `Já usa ${x.seg.adapt.join(', ').toLowerCase()} (item ${id})` });
     });
     const i27 = r['27'];
-    if (i27 && i27.v !== 'Não sei') c.push({ k: 'interesses', t: `Interessa-se por ${i27.v}` + (i27.seg.comoAjudam && i27.seg.comoAjudam.length ? `, o que pode ajudar a ${i27.seg.comoAjudam.map(x => x.toLowerCase()).join(', ')}`.replace('ajudar a motivar nas tarefas', 'motivá-lo nas tarefas').replace('ajudar a ponte para conversar com colegas', 'servir de ponte para conversar com colegas').replace('ajudar a momento de descanso ou de regulação', 'dar-lhe momentos de descanso ou de regulação') : '') });
+    if (i27 && i27.v !== 'Não sei') {
+        const COMO = { 'Motivar nas tarefas': 'motivá-lo nas tarefas', 'Ponte para conversar com colegas': 'servir de ponte para conversar com colegas', 'Momento de descanso ou de regulação': 'dar-lhe momentos de descanso ou de regulação' };
+        const como = (i27.seg.comoAjudam || []).map(x => COMO[x]).filter(Boolean);
+        const lista = como.length > 1 ? `${como.slice(0, -1).join(', ')} e ${como[como.length - 1]}` : como.join('');
+        c.push({ k: 'interesses', t: `Interessa-se por ${i27.v}` + (lista ? `, o que pode ${lista}` : '') });
+    }
     sugestoesPlanas().forEach(s => {
         const m = estado.marcacoes[s.id];
         if (m && m.estado === 'pratica' && ['ajuda', 'muito'].includes(m.ajuda)) c.push({ k: `estr:${s.id}`, t: `${s.L.texto} (já em prática, ${rotulo(AJUDA, m.ajuda).toLowerCase()})` });
@@ -1052,23 +1057,27 @@ function construirRelatorio() {
 
     const p3 = el('div', 'sintese-parte');
     p3.appendChild(el('h5', null, '3. Que apoios vamos implementar ou manter'));
-    if (apoios.length) {
+    const itensBarreiras = barreirasEscolhidas().filter(k => k.startsWith('item:')).map(k => k.slice(5));
+    const apoiosPrimeira = apoios.filter(s => s.itens.some(i => itensBarreiras.includes(i)));
+    if (apoios.length && !apoiosPrimeira.length) p3.appendChild(el('p', 'mensagem-vazia', 'Escolha as barreiras acima. Aqui aparecem os apoios marcados para essas situações. A lista completa está mais abaixo, em «Apoios sugeridos e decisões».'));
+    if (apoiosPrimeira.length) {
+        p3.appendChild(el('p', 'nota-secao so-ecra', 'Aparecem aqui os apoios das barreiras escolhidas. Os outros estão em «Apoios sugeridos e decisões».'));
         const ul = el('ul', 'lista-sintese');
-        apoios.forEach(s => {
+        apoiosPrimeira.forEach(s => {
             const m = marc(s.id);
             const li = el('li');
             li.appendChild(el('span', null, s.L.texto));
             li.appendChild(el('span', 'estado-apoio', m.estado === 'nao' ? ' · a implementar' : ` · já em prática${m.ajuda ? `, ${rotulo(AJUDA, m.ajuda).toLowerCase()}` : ''}`));
-            li.appendChild(el('span', 'responsavel', ` · responsável, ${m.responsavel ? m.responsavel : 'por indicar'}`));
+            if (m.estado === 'nao' || m.responsavel) li.appendChild(el('span', 'responsavel', ` · responsável, ${m.responsavel ? m.responsavel : 'por indicar'}`));
             ul.appendChild(li);
         });
         p3.appendChild(ul);
-    } else p3.appendChild(el('p', 'mensagem-vazia', 'Marque nas sugestões os apoios que já se fazem («Já está implementada») e os que vão começar («Ainda não»).'));
+    } else if (!apoios.length) p3.appendChild(el('p', 'mensagem-vazia', 'Marque nas sugestões os apoios que já se fazem («Já está implementada») e os que vão começar («Ainda não»).'));
     p.appendChild(p3);
 
     const p4 = el('div', 'sintese-parte');
     p4.appendChild(el('h5', null, '4. Como saberemos se os apoios estão a funcionar'));
-    const aImplementar = apoios.filter(s => marc(s.id).estado === 'nao');
+    const aImplementar = apoiosPrimeira.filter(s => marc(s.id).estado === 'nao');
     if (aImplementar.length) p4.appendChild(listaSimples(aImplementar.map(s => `${s.L.texto}. ${s.L.comoSaber || 'Indicador por definir'}`)));
     const g = el('div', 'form-grid campos-acompanhamento');
     g.innerHTML = `<div class="form-group"><label for="dataRevisao">Data de revisão</label><input type="date" id="dataRevisao" class="so-ecra"><p class="so-impressao" id="dataRevisaoTexto"></p></div>
@@ -1088,16 +1097,16 @@ function construirRelatorio() {
     itensAbertos().forEach(i => { if (semInformacao(i, r)) av.push(`${ITENS[i].titulo} (item ${i}, ${r[i].v.toLowerCase()})`); });
     AREAS.filter(a => !areaAberta(a.nome)).forEach(a => av.push(`Área não observada, ${a.nome.toLowerCase()}`));
     condicoesEscola().filter(x => x.v === 'Não sei').forEach(x => av.push(`Condição da escola, ${x.t.charAt(0).toLowerCase() + x.t.slice(1)}`));
-    const p5 = el('div', 'sintese-parte');
+    const p5 = el('div', 'sintese-parte parte-larga');
     p5.appendChild(el('h5', null, 'O que averiguar'));
     if (av.length) p5.appendChild(listaSimples(av)); else p5.appendChild(el('p', 'mensagem-vazia', 'Nada por averiguar.'));
     p.appendChild(p5);
 
     // Relatório provisório: uma barreira escolhida sem apoio associado
-    const semApoio = barreirasEscolhidas().filter(k => k.startsWith('item:')).map(k => k.slice(5)).filter(item => !apoios.some(s => s.itens.includes(item)));
+    const semApoio = barreirasEscolhidas().filter(k => k.startsWith('item:')).map(k => k.slice(5)).filter(item => !apoiosPrimeira.some(s => s.itens.includes(item)));
     if (semApoio.length) {
         p.querySelector('h4').textContent = 'O essencial para apoiar este aluno (provisório)';
-        p.appendChild(el('p', 'aviso-provisorio', `O relatório é provisório porque ${semApoio.length === 1 ? 'a barreira do item' : 'as barreiras dos itens'} ${semApoio.join(', ')} ainda não ${semApoio.length === 1 ? 'tem' : 'têm'} nenhum apoio associado.`));
+        p.appendChild(el('p', 'aviso-provisorio parte-larga', `O relatório é provisório porque ${semApoio.length === 1 ? 'a barreira do item' : 'as barreiras dos itens'} ${semApoio.join(', ')} ainda não ${semApoio.length === 1 ? 'tem' : 'têm'} nenhum apoio associado.`));
     }
     c.appendChild(p);
 
@@ -1156,6 +1165,7 @@ function construirRelatorio() {
             const m = marc(s.id);
             let x = `${s.L.texto} (item ${s.itens.join(', ')})`;
             if (e === 'pratica' && m.ajuda) x += `, ${rotulo(AJUDA, m.ajuda).toLowerCase()}`;
+            if (e === 'nao') x += ` · responsável, ${m.responsavel || 'por indicar'}`;
             if (e === 'impossivel' && m.motivos && m.motivos.length) x += `, ${m.motivos.map(v => rotulo(MOTIVOS, v).toLowerCase()).join('; ')}`;
             return x;
         })));

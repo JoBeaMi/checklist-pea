@@ -2091,3 +2091,14 @@ h3 {
     border-color: var(--caidi-light);
     background: #fbfefd;
 }
+
+@media print {
+    .secao-sintese .parte-larga {
+        grid-column: 1 / -1;
+    }
+
+    .secao-sintese .parte-larga .lista-sintese {
+        columns: 2;
+        column-gap: 18px;
+    }
+}
