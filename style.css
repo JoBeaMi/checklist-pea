@@ -1739,3 +1739,355 @@ h3 {
         gap: 6px;
     }
 }
+
+/* ---------- Versão 2.12: respostas, seguimentos, sugestões ---------- */
+
+/* Opção escolhida com a mesma cor em todas as escalas */
+.sinal-opcoes input[type="radio"]:checked + .opcao {
+    background: var(--caidi-light);
+    border-color: var(--caidi-dark);
+    color: var(--caidi-dark);
+    font-weight: 600;
+}
+
+.pergunta-escala {
+    font-size: 0.9em;
+    color: var(--cinza-medio);
+    font-style: italic;
+    margin: -4px 0 10px;
+}
+
+.criterios {
+    margin-top: 10px;
+    font-size: 0.88em;
+}
+
+.criterios summary,
+.ver-mais summary,
+.principios summary,
+.outro-contexto summary {
+    cursor: pointer;
+    color: var(--caidi-dark);
+    font-weight: 600;
+}
+
+.criterios ul {
+    margin: 6px 0 0 18px;
+}
+
+.criterios li {
+    margin-bottom: 4px;
+}
+
+.criterios .exemplo-item {
+    color: var(--cinza-medio);
+}
+
+.seguimentos {
+    margin-top: 8px;
+}
+
+.seguimento {
+    border-left: 3px solid var(--caidi-light);
+    padding: 6px 0 6px 12px;
+    margin-top: 8px;
+}
+
+.seguimento[hidden],
+.sub-risco[hidden] {
+    display: none;
+}
+
+.seguimento .rotulo-campo {
+    font-weight: 600;
+    font-size: 0.93em;
+    margin-bottom: 4px;
+}
+
+.seguimento .opcional {
+    font-weight: 400;
+    color: var(--cinza-medio);
+}
+
+.campo-texto {
+    width: 100%;
+    padding: 7px 8px;
+    border: 1px solid var(--caidi-light);
+    border-radius: 5px;
+    font: inherit;
+    font-size: 0.93em;
+}
+
+.campos-episodios {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+    align-items: center;
+}
+
+.campo-numero input {
+    width: 70px;
+    padding: 5px;
+    margin-left: 6px;
+    border: 1px solid var(--caidi-light);
+    border-radius: 5px;
+}
+
+.sub-risco {
+    margin: 8px 0 0 12px;
+}
+
+.outro-contexto {
+    font-size: 0.92em;
+}
+
+.outro-contexto[open] {
+    padding-bottom: 6px;
+}
+
+/* Condições da escola */
+.escola {
+    background: #fbfcf8;
+}
+
+.escola:empty {
+    display: none;
+}
+
+.grupo-escola {
+    margin-top: 16px;
+}
+
+.grupo-escola h4 {
+    color: var(--caidi-dark);
+    margin-bottom: 6px;
+}
+
+.linha-escola {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.linha-escola p {
+    margin-bottom: 4px;
+}
+
+/* Ecrã das sugestões */
+.sugestoes {
+    background: #f7fbfa;
+}
+
+.sugestoes-area {
+    margin: 26px 0 6px;
+    padding-bottom: 4px;
+    border-bottom: 2px solid var(--caidi-primary);
+    color: var(--caidi-dark);
+    text-transform: uppercase;
+    font-size: 0.95em;
+    letter-spacing: 0.03em;
+}
+
+.grupo-sugestoes {
+    background: var(--branco);
+    border: 1px solid #e3ecea;
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-top: 12px;
+}
+
+.grupo-sugestoes h5 {
+    font-size: 1em;
+    margin-bottom: 2px;
+}
+
+.resumo-resposta {
+    font-size: 0.85em;
+    color: var(--cinza-medio);
+    margin-bottom: 6px;
+}
+
+.principio {
+    font-size: 0.88em;
+    font-style: italic;
+    color: #3d5552;
+    background: #eef6f5;
+    border-radius: 4px;
+    padding: 4px 8px;
+    margin-bottom: 6px;
+}
+
+.principios {
+    font-size: 0.9em;
+    margin-bottom: 6px;
+}
+
+.principios ul {
+    margin: 4px 0 0 18px;
+}
+
+.grupo-opcional {
+    border-color: var(--caidi-light);
+}
+
+.cartao-estrategia {
+    border-top: 1px solid #edf2f1;
+    padding: 10px 0 8px;
+}
+
+.cartao-texto {
+    font-weight: 600;
+}
+
+.cartao-itens,
+.cartao-indicador,
+.cartao-depende,
+.cartao-pratica,
+.cartao-nota {
+    font-size: 0.84em;
+    color: var(--cinza-medio);
+    margin-top: 2px;
+}
+
+.cartao-seguranca {
+    border-left: 4px solid #c41e3a;
+    padding-left: 10px;
+}
+
+.etiqueta-seguranca {
+    display: inline-block;
+    background: #c41e3a;
+    color: var(--branco);
+    font-size: 0.75em;
+    font-weight: 700;
+    border-radius: 3px;
+    padding: 1px 6px;
+    margin-right: 6px;
+    vertical-align: 2px;
+}
+
+.etiqueta-opcional {
+    font-weight: 400;
+    color: var(--cinza-medio);
+}
+
+.cartao-pendente .cartao-texto {
+    font-weight: 500;
+    color: #555;
+}
+
+.cartao-confirmar {
+    background: #fff9e8;
+    border-radius: 6px;
+    padding: 6px 10px;
+    margin-top: 6px;
+}
+
+.marcacao {
+    margin-top: 6px;
+}
+
+.marcacao .rotulo-campo {
+    font-size: 0.88em;
+    font-weight: 600;
+    margin-top: 4px;
+}
+
+.btn-limpar-marcacao {
+    border: none;
+    background: none;
+    color: var(--caidi-dark);
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 0.85em;
+}
+
+.ver-mais {
+    margin-top: 8px;
+}
+
+.nota-partilhada {
+    font-size: 0.85em;
+    color: var(--cinza-medio);
+    margin-top: 6px;
+}
+
+/* Relatório */
+.tabela-observado {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88em;
+    margin: 4px 0 12px;
+}
+
+.tabela-observado th,
+.tabela-observado td {
+    border: 1px solid #ddd;
+    padding: 4px 6px;
+    text-align: left;
+    vertical-align: top;
+}
+
+.tabela-observado th {
+    background: #f0f6f5;
+}
+
+.tabela-observado .com-necessidade {
+    font-weight: 600;
+}
+
+.chegam {
+    font-size: 0.88em;
+    margin: 2px 0 6px 22px;
+}
+
+.estado-apoio,
+.responsavel {
+    color: var(--cinza-medio);
+    font-size: 0.92em;
+}
+
+.aviso-provisorio {
+    background: #fff4d6;
+    border-left: 4px solid #e0a800;
+    padding: 6px 10px;
+    margin-top: 10px;
+    font-size: 0.9em;
+}
+
+@media print {
+    .escola,
+    .sugestoes,
+    .contexto,
+    .sobre {
+        display: none !important;
+    }
+
+    .quebra-antes {
+        break-before: page;
+    }
+
+    .chegam .so-impressao {
+        display: inline;
+    }
+
+    .tabela-observado {
+        break-inside: auto;
+    }
+
+    .tabela-observado tr {
+        break-inside: avoid;
+    }
+}
+
+.tabela-observado {
+    table-layout: fixed;
+}
+
+.tabela-observado th:nth-child(1) { width: 50%; }
+.tabela-observado th:nth-child(2) { width: 32%; }
+.tabela-observado th:nth-child(3) { width: 18%; }
+
+.grupo-ouvir {
+    border-color: var(--caidi-light);
+    background: #fbfefd;
+}

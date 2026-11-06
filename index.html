@@ -34,7 +34,7 @@
 
         <main>
             <section class="sobre">
-                <p><strong>Para que serve.</strong> Esta checklist ajuda a observar as competências, características e condições que influenciam a participação de alunos autistas, com ou sem diagnóstico, e a planear o apoio na escola. Não serve para diagnosticar nem para sinalizar possível autismo.</p>
+                <p><strong>Para que serve.</strong> Esta checklist ajuda a identificar o que facilita e o que dificulta a participação de alunos autistas, com ou sem diagnóstico, e a planear o apoio na escola. Não serve para diagnosticar nem para sinalizar possível autismo.</p>
             </section>
 
             <!-- Identificação -->
@@ -69,16 +69,16 @@
                         <input type="text" id="professor" placeholder="Nome do professor" required>
                     </div>
                     <div class="form-group">
-                        <label for="periodo">Período de observação</label>
+                        <label for="periodo">Período indicado</label>
                         <select id="periodo" required>
                             <option value="">Escolher</option>
-                            <option>Última semana</option>
                             <option>Último mês</option>
                             <option>Este período letivo</option>
                             <option>Desde o início do ano letivo</option>
                         </select>
                     </div>
                 </div>
+                <p class="nota-secao">Todas as perguntas falam deste período.</p>
             </section>
 
             <!-- Contexto -->
@@ -113,29 +113,15 @@
                 </details>
             </section>
 
-            <!-- Pontos fortes -->
-            <section class="pontos-fortes" aria-labelledby="titulo-fortes">
-                <h3 id="titulo-fortes">Pontos fortes e voz do aluno e da família</h3>
-                <p class="nota-secao">Comece pelo que corre bem. Estes campos são opcionais e aparecem no início do relatório. Os interesses do aluno estão no item 27.</p>
-                <div class="form-grid">
-                    <div class="form-group"><label for="pf_destaca">Em que se destaca e o que corre bem</label><textarea id="pf_destaca" class="campo-livre" rows="2" placeholder="Ex.: memória para factos, rigor, gosto por regras claras"></textarea></div>
-                    <div class="form-group"><label for="pf_acalma">O que o ajuda a acalmar</label><textarea id="pf_acalma" class="campo-livre" rows="2" placeholder="Ex.: auscultadores, desenhar, um sítio calmo"></textarea></div>
-                    <div class="form-group"><label for="pf_comunica">Como prefere comunicar</label><textarea id="pf_comunica" class="campo-livre" rows="2" placeholder="Ex.: por escrito, com imagens, falar a sós"></textarea></div>
-                    <div class="form-group"><label for="voz_aluno">O que o aluno diz que o ajuda e o que lhe custa</label><textarea id="voz_aluno" class="campo-livre" rows="2" placeholder="Se foi possível perguntar"></textarea></div>
-                    <div class="form-group"><label for="voz_familia">O que a família partilha</label><textarea id="voz_familia" class="campo-livre" rows="2" placeholder="Ex.: o que funciona em casa, preocupações"></textarea></div>
-                </div>
-            </section>
-
             <!-- Instruções -->
             <section class="instrucoes">
-                <p><strong>Como responder.</strong> Há quatro tipos de pergunta, e cada uma tem as suas opções.</p>
+                <p><strong>Como responder.</strong> Há três tipos de pergunta.</p>
                 <ul class="lista-instrucoes">
-                    <li><strong>Competências.</strong> Escolha o apoio de que o aluno precisa, <em>incluindo o que já recebe</em>. Um aluno que está bem porque já tem uma adaptação continua a precisar dela. Se faz sem apoio na escola mas não sabe se também o faz noutros contextos, escolha «Sem apoio, na escola» e indique o que sabe.</li>
-                    <li><strong>Participação.</strong> Responda sim, às vezes, não ou não sei.</li>
-                    <li><strong>Características.</strong> Indique se se observa e qual o impacto na participação ou no bem-estar. O impacto pode vir da reação dos outros.</li>
-                    <li><strong>Situações e bem-estar.</strong> Responda sim, não ou não sei.</li>
+                    <li><strong>O que o aluno faz</strong> (por exemplo, «Segue instruções orais com dois ou mais passos»). Indique com que frequência precisou de ajuda individual, contando com as adaptações que já usa. Uma adaptação é um recurso que o aluno usa (um horário visual, o temporizador do tablet). A ajuda individual é dada por outra pessoa (um lembrete, uma demonstração só para ele). Quando é o adulto que faz a atividade em vez do aluno, a resposta é «Não realizou a atividade…».</li>
+                    <li><strong>O que se observou</strong> (por exemplo, «Mostra ou diz que se sente desconfortável com certos sons»). Responda «Sim» quando, no período indicado, observou ou alguém lhe referiu isto. «Não» quer dizer que não foi identificado no período, e não que nunca acontece. Com «Sim», indique de que forma afeta a participação do aluno.</li>
+                    <li><strong>Situações e bem-estar</strong> (por exemplo, episódios de exclusão). Cada pergunta tem as suas respostas. Quando lhe falta informação, escolha «Não sei», que aparece no relatório como algo a averiguar.</li>
                 </ul>
-                <p class="nota">Use «Não foi possível observar» quando não teve oportunidade de ver. O preenchimento fica guardado neste separador enquanto estiver aberto.</p>
+                <p class="nota">Cada item tem «Ajuda para escolher», com o que quer dizer cada resposta. As perguntas a seguir aparecem conforme a resposta. O preenchimento fica guardado neste separador enquanto estiver aberto.</p>
             </section>
 
             <!-- Áreas -->
@@ -154,17 +140,26 @@
 
             <section class="checklist" id="checklist" aria-label="Checklist" tabindex="-1"></section>
 
+            <section class="escola" id="escola" aria-label="Condições da escola"></section>
+
             <section class="acoes">
-                <label class="opcao-relatorio"><input type="checkbox" id="incluirObservacoes" checked> Incluir as observações no relatório</label>
-                <label class="opcao-relatorio"><input type="checkbox" id="incluirPorDecidir"> Incluir no PDF as estratégias por decidir</label>
-                <label class="opcao-relatorio"><input type="checkbox" id="incluirSaude"> Incluir no PDF a informação de saúde (diagnóstico e apoios fora da escola marcados com ✚)</label>
-                <button type="button" class="btn btn-primary" id="btnGerar">📊 Gerar Relatório</button>
+                <button type="button" class="btn btn-primary" id="btnSugestoes">Ver as sugestões de apoio</button>
                 <button type="button" class="btn btn-secondary" id="btnLimpar">🔄 Limpar Tudo</button>
+            </section>
+
+            <section class="sugestoes" id="sugestoes" hidden aria-labelledby="titulo-sugestoes" tabindex="-1">
+                <h3 id="titulo-sugestoes">Sugestões de apoio</h3>
+                <p class="nota-secao">Este ecrã não vai para o PDF. Em cada sugestão, diga se isto já se faz. Com «Já está implementada», indique quanto ajuda. Com «Ainda não», a sugestão vai para os apoios a implementar. Com «Não é possível», indique porquê. As sugestões que precisam de uma confirmação sua ficam como possibilidade a ponderar até responder. As outras estão em «Ver mais».</p>
+                <div id="sugestoesConteudo"></div>
+                <div class="acoes">
+                    <label class="opcao-relatorio"><input type="checkbox" id="incluirSaude"> Incluir no PDF a informação de saúde (diagnóstico e apoios fora da escola marcados com ✚)</label>
+                    <button type="button" class="btn btn-primary" id="btnGerar">📊 Fazer o relatório</button>
+                </div>
             </section>
 
             <section class="relatorio" id="relatorio" hidden aria-labelledby="titulo-relatorio" tabindex="-1">
                 <div class="relatorio-header">
-                    <h3 id="titulo-relatorio">Relatório de Observação</h3>
+                    <h3 id="titulo-relatorio">Relatório de Observação e Planeamento</h3>
                     <button type="button" class="btn btn-success" id="btnPDF">💾 Guardar como PDF</button>
                 </div>
                 <p class="dica-pdf">Na janela de impressão, escolha <strong>«Guardar como PDF»</strong> como destino.</p>
@@ -173,7 +168,7 @@
 
             <section class="partilha" id="partilha" hidden aria-labelledby="titulo-partilha">
                 <h3 id="titulo-partilha">Partilhar sem identificação</h3>
-                <p>Pode partilhar com a CAIDI os níveis assinalados e as estratégias marcadas, para ajudar a validar e melhorar a ferramenta. <strong>Nunca são enviados</strong> o nome, a turma, a data exata, o nome do professor nem nenhum campo de texto livre.</p>
+                <p>Pode partilhar com a CAIDI as respostas assinaladas e as decisões sobre as sugestões, para ajudar a melhorar a ferramenta. <strong>Nunca são enviados</strong> o nome, a turma, a data exata, o nome do professor nem nenhum campo de texto livre.</p>
                 <label class="opcao-relatorio confirmar-partilha"><input type="checkbox" id="confirmarAutorizacao"> Confirmo que a família deste aluno autorizou esta partilha</label>
                 <details class="detalhe-envio">
                     <summary>Ver exatamente o que vai ser enviado</summary>
@@ -188,11 +183,13 @@
             <p>© CAIDI 2025 | Coordenação Científica: <strong>NIDCAIDI</strong></p>
             <p>Para: Agrupamento de Escolas Padre Vítor Melícias</p>
             <p class="aviso">⚠️ Esta é uma ferramenta pedagógica de observação. Não é um instrumento de diagnóstico clínico.</p>
-            <p class="privacidade">🔒 <strong>Privacidade:</strong> Os dados que identificam o aluno (nome, turma, data, nome do professor, observações e outros campos de texto) nunca saem deste dispositivo. Ficam guardados temporariamente neste separador do navegador e são apagados quando o fecha ou clica em «Limpar Tudo».<span id="privacidadePartilha"> No fim do relatório, o professor pode escolher partilhar com a CAIDI, sem identificação, os níveis assinalados e as estratégias marcadas, apenas quando a família autorizou.</span> A página recolhe ainda estatísticas anónimas de visitas (Google Analytics), que não incluem nenhum dado do formulário.</p>
+            <p class="privacidade">🔒 <strong>Privacidade:</strong> Os dados que identificam o aluno (nome, turma, data, nome do professor e campos de texto) nunca saem deste dispositivo. Ficam guardados temporariamente neste separador do navegador e são apagados quando o fecha ou clica em «Limpar Tudo».<span id="privacidadePartilha"> No fim do relatório, o professor pode escolher partilhar com a CAIDI, sem identificação, as respostas assinaladas e as decisões sobre as sugestões, apenas quando a família autorizou.</span> A página recolhe ainda estatísticas anónimas de visitas (Google Analytics), que não incluem nenhum dado do formulário.</p>
         </footer>
     </div>
 
     <script src="dados.js"></script>
+    <script src="condicoes.js"></script>
+    <script src="estrategias.js"></script>
     <script src="app.js"></script>
 </body>
 </html>

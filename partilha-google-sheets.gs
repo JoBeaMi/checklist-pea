@@ -16,8 +16,11 @@ function doPost(e) {
     Object.keys(dados).forEach(chave => {
       const v = dados[chave];
       if (chave === 'itens') {
-        Object.keys(v).forEach(k => { linha[k] = v[k]; });
-      } else if (chave === 'estrategias_marcadas') {
+        Object.keys(v).forEach(k => {
+          linha[k] = v[k] && typeof v[k] === 'object' ? v[k].v : v[k];
+          if (v[k] && v[k].seg && Object.keys(v[k].seg).length) linha[k + '_seg'] = JSON.stringify(v[k].seg);
+        });
+      } else if (v && typeof v === 'object' && !Array.isArray(v)) {
         linha[chave] = JSON.stringify(v);
       } else if (Array.isArray(v)) {
         linha[chave] = v.join('; ');

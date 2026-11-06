@@ -14,40 +14,42 @@ Para: Agrupamento de Escolas Padre Vítor Melícias
 Uma aplicação web gratuita, que funciona no computador, no tablet e no telemóvel. Com ela, o professor pode:
 
 - registar o contexto do aluno (horas na turma, apoios na escola e fora da escola, medidas em vigor);
-- observar 38 itens em sete áreas, preenchendo só as áreas que quer observar nessa altura;
-- registar observações em cada item;
-- gerar um relatório com as estratégias que correspondem ao que foi assinalado;
-- marcar cada estratégia como «Já está em prática» (e quanto ajuda), «Ainda não» ou «Não é possível» (e porquê);
-- escolher entre três e cinco estratégias para começar;
-- guardar o relatório como PDF, que abre com a síntese «O essencial para apoiar este aluno».
+- responder a 49 itens em sete áreas, preenchendo só as áreas que quer observar nessa altura, com perguntas a seguir que aparecem conforme a resposta;
+- responder às condições da escola das áreas em que há necessidades;
+- ver as sugestões de apoio que correspondem às respostas, com as de segurança primeiro e as restantes em «Ver mais»;
+- dizer, em cada sugestão, se isto já se faz («Já está implementada», e quanto ajuda), se vai começar («Ainda não», e quem fica responsável) ou se não é possível (e porquê);
+- guardar como PDF um relatório que abre com «O essencial para apoiar este aluno».
 
 Não é preciso instalar nada nem criar conta.
 
 ## Privacidade
 
-- Os dados que identificam o aluno (nome, turma, data, nome do professor, observações e outros campos de texto) são processados **apenas no dispositivo** do professor.
+- Os dados que identificam o aluno (nome, turma, data, nome do professor e campos de texto) são processados **apenas no dispositivo** do professor.
 - Enquanto o separador do navegador estiver aberto, o preenchimento fica guardado (`sessionStorage`), para não se perder se a página for atualizada. É apagado quando o separador é fechado ou quando se clica em «Limpar Tudo».
 - O diagnóstico e as terapias e consultas fora da escola são dados de saúde. Só aparecem no PDF se o professor escolher incluí-los.
-- Se a partilha estiver ligada (ver abaixo), o professor pode enviar à CAIDI, sem identificação e só quando a família autorizou, os valores dos itens e as estratégias marcadas. Nunca são enviados o nome, a turma, a data exata, o nome do professor nem nenhum texto livre. Enquanto a partilha não estiver ligada, esta opção não aparece.
+- Se a partilha estiver ligada (ver abaixo), o professor pode enviar à CAIDI, sem identificação e só quando a família autorizou, as respostas de listas fechadas e as decisões sobre as sugestões. Nunca são enviados o nome, a turma, a data exata, o nome do professor nem nenhum texto livre. Enquanto a partilha não estiver ligada, esta opção não aparece.
 - A página recolhe estatísticas anónimas de visitas (Google Analytics), que não incluem nenhum dado do formulário.
 
 ## Como usar
 
 1. Abrir a página da aplicação.
-2. Preencher a identificação e, se souber, o contexto e os apoios.
-3. Escolher as áreas a observar. A área «Emoções e regulação» e o item 12 (exclusão, troça ou intimidação) estão sempre visíveis.
-4. Responder aos itens. Nas competências, escolher o apoio de que o aluno precisa, incluindo o que já recebe.
-5. Clicar em **Gerar Relatório** e marcar as estratégias.
-6. Rever a síntese no início do relatório e escolher as estratégias para começar.
-7. Clicar em **Guardar como PDF** e escolher «Guardar como PDF» na janela de impressão.
+2. Preencher a identificação, incluindo o período a que as respostas se referem, e, se souber, o contexto e os apoios.
+3. Escolher as áreas a observar. A área «Emoções e regulação» e o item 12 (exclusão, troça ou intimidação) estão sempre visíveis. A autonomia pessoal começa fechada a partir do 2.º ciclo.
+4. Responder aos itens. Cada item tem «Ajuda para escolher». As perguntas a seguir aparecem conforme a resposta.
+5. Responder às condições da escola, no fim dos itens.
+6. Clicar em **Ver as sugestões de apoio** e dizer, em cada uma, se isto já se faz. As sugestões que precisam de uma confirmação ficam como possibilidade a ponderar até se responder.
+7. Clicar em **Fazer o relatório**, escolher o que entra na primeira página (até cinco pontos fortes e até três barreiras) e indicar a data de revisão.
+8. Clicar em **Guardar como PDF** e escolher «Guardar como PDF» na janela de impressão.
 
 ## Estrutura do projeto
 
 | Ficheiro | Conteúdo |
 |---|---|
 | `index.html` | Estrutura da página |
-| `dados.js` | **Conteúdo da checklist**: áreas, itens, estratégias e fontes |
-| `app.js` | Funcionamento da aplicação (checklist, áreas, relatório, síntese, partilha, PDF) |
+| `dados.js` | **Conteúdo da checklist**: áreas, itens, seguimentos, condições da escola, princípios e estratégias |
+| `estrategias.js` | **Quando aparece cada estratégia**: uma condição por par «estratégia\|item» |
+| `condicoes.js` | As funções que as condições usam (`R.is`, `R.ajuda`, `R.ef`, `R.sit`, `R.tem`…) |
+| `app.js` | Funcionamento da aplicação (itens, seguimentos, sugestões, relatório, partilha, PDF) |
 | `style.css` | Aspeto visual, versão para telemóvel e versão para impressão |
 | `partilha-google-sheets.gs` | Script do Google Sheets que recebe a partilha sem identificação |
 | `logo-caidi.png` | Logótipo |
@@ -56,46 +58,22 @@ Não é preciso instalar nada nem criar conta.
 
 | Tipo | Para que serve | Respostas |
 |---|---|---|
-| `N` | Competência e apoio | 1 Apoio regular ou intenso · 2 Apoio pontual · 3 Sem apoio, na escola · 4 Sem apoio, também noutros contextos · Não foi possível observar |
-| `P` | Participação | Sim · Às vezes · Não · Não sei |
-| `C` | Característica a acomodar | 0 Não se observa · 1 Pouco impacto · 2 Impacto claro · Não foi possível observar |
-| `B` | Situação do contexto | Sim · Não · Não sei |
-| `W` | Bem-estar | Sim · Não · Não sei |
-| `D` | Descritivo (interesses) | Sim · Não · Não foi possível observar |
-
-O relatório não calcula um nível global. Mostra um perfil por área, que descreve onde o aluno precisa de apoio.
+| `N` | O que o aluno faz | Sem ajuda individual · Ajuda pontual · Ajuda frequente · Ajuda sistemática · Não realizou a atividade… · Não foi possível observar · Não se aplica |
+| `C` | O que se observou | Sim · Não · Não tenho informação suficiente. Com «Sim», o efeito na participação |
+| `P` | Participação, situações e bem-estar | As respostas de cada item (Sim · Às vezes · Não · Não sei, e outras) |
+| `D` | Interesses | Texto livre ou «Não sei» |
 
 ### Editar itens e estratégias
 
-Todo o conteúdo está em `dados.js`, no objeto `CONTEUDO`.
+O conteúdo vem dos documentos de trabalho da checklist (itens v2.12 e as sete matrizes das estratégias).
 
-- `areas` tem as áreas, pela ordem em que aparecem, com a lista dos itens de cada uma (`itens`) e as estratégias para a escola (`escola`), que entram quando a área tem itens assinalados.
-- `itens` tem cada item, com o número (`n`), a área, o tipo (`tipo`), o texto e as estratégias.
-- `transversais` tem as estratégias de escola e família, que aparecem sempre.
-- `fontes` tem as referências citadas nos itens e nas estratégias.
-
-As estratégias de cada item estão agrupadas pela resposta que as faz aparecer.
-
-| Tipo | Grupos de estratégias |
-|---|---|
-| `N` | `nivel1` (apoio regular), `nivel2` (apoio pontual) |
-| `P` | `asvezes`, `nao` |
-| `C` | `grau1` (pouco impacto), `grau2` (impacto claro) |
-| `B`, `W` | `sim` |
-| `D` | `motivar`, `mudar`, `conversa` |
-
-Cada estratégia tem o texto (`t`) e pode ter:
-
-- `pbe`, com as práticas com evidência da revisão do NCAEP (Hume et al., 2021);
-- `aval`, com a adaptação ao processo de avaliação (art. 28.º do Decreto-Lei n.º 54/2018);
-- `nota`, que aparece por baixo da estratégia;
-- `fase`, nas crises (item 23), com `prevencao`, `sinais`, `pico` ou `recuperacao`;
-- `fontes`, com as chaves de `fontes`.
+- Em `dados.js`, `itens` tem cada item com a pergunta, as opções, os critérios («Ajuda para escolher») e os seguimentos (`seg`). Cada seguimento tem uma chave (`k`), a pergunta (`p`), as opções (`o`) e a condição em que aparece (`se`).
+- Em `dados.js`, `linhas` tem as estratégias, com o identificador (`id`), o item, o texto, a finalidade, o indicador (`comoSaber`), o responsável possível e quem consultar. Uma ação partilhada por vários itens tem o mesmo `id` em todos e aparece uma só vez.
+- Em `estrategias.js`, cada par `'id|item'` tem a condição `quando`, e pode ter `confirmacao` (a pergunta «Confirma que…?»), `primeiro`, `depois`, `verMais`, `opcional` e `planoDepende`.
 
 ```js
-{
-  "t": "Acompanhar instruções orais com apoio visual (imagens, texto escrito, demonstração)",
-  "pbe": ["Apoios visuais"]
+'cantina-ambiente|13': {
+  quando: R => R.sit('13', 'Cantina') && (R.tem('13', 'quem', 'O aluno') || R.ef('13', 'dificulta', 'interrompe'))
 }
 ```
 
@@ -114,7 +92,7 @@ A partilha envia cada relatório autorizado para uma linha de uma folha de Googl
 
 «Qualquer pessoa» quer dizer que qualquer pessoa pode enviar uma linha para a folha. Não quer dizer que pode ler a folha, que continua reservada a quem tem acesso a ela.
 
-Na folha, cada linha é um relatório. As colunas `item_1` a `item_38` têm o valor de cada item, e as áreas fechadas ficam em branco. Quando uma competência tem o valor 3, a coluna `item_N_contextos` diz se precisa de apoio noutros contextos (`nao`), se não foi possível observar (`naosei`) ou se ficou sem resposta (`sem_resposta`). A coluna `estrategias_marcadas` tem o estado de cada estratégia marcada (`pratica`, `nao` ou `impossivel`), com o grau de ajuda ou os motivos. Se o mesmo relatório for enviado duas vezes, aparece com o mesmo `id`, e na análise fica-se com a linha mais recente.
+Na folha, cada linha é um relatório. As colunas `item_1a` a `item_38` têm a resposta de cada item, e as áreas fechadas ficam em branco. As colunas `item_…_seg` têm as respostas aos seguimentos de listas fechadas (os textos livres nunca são enviados). A coluna `estrategias_marcadas` tem o estado de cada estratégia marcada (`pratica`, `nao` ou `impossivel`), com o grau de ajuda ou os motivos. As colunas `condicoes_escola` e `confirmacoes` têm as respostas às condições da escola e às confirmações. Se o mesmo relatório for enviado duas vezes, aparece com o mesmo `id`, e na análise fica-se com a linha mais recente.
 
 ## Publicação
 
